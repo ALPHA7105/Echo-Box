@@ -67,7 +67,7 @@ try:
             if st.button(f"Delete row {row.name}"):
                 data = data.drop(row.name)
                 data.to_csv(CSV_FILE, mode='w', header=False, index=False)
-                st.experimental_rerun()
+                st.rerun()
 
         st.subheader("Suggestions by Category")
         if not data.empty:
