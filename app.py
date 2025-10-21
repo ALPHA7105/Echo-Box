@@ -86,7 +86,7 @@ if page == "dashboard":
             st.markdown("---")
             for i, row in display_data.iterrows():
                 st.markdown(f"**[{row['Category']}]** {row['Suggestion']}")
-                if st.button(f"Delete row {row.name}"):
+                if st.button("Delete"):
                     data = data.drop(row.name)
                     data.to_csv(CSV_FILE, mode='w', header=False, index=False)
                     st.rerun()
