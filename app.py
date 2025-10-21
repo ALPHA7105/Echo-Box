@@ -47,8 +47,8 @@ if submitted:
 # --- Dashboard Section ---
 st.header("📊 Dashboard - View Suggestions")
 try:
-    data = pd.read_csv(CSV_FILE)
-    
+    data = pd.read_csv(CSV_FILE, names=["Time", "Category", "Suggestion"])
+
     # Filter by category
     filter_cat = st.selectbox("Filter by Category", ["All"] + list(data['Category'].unique()))
     if filter_cat != "All":
