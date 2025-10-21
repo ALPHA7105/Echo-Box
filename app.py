@@ -20,8 +20,10 @@ if "page" not in st.session_state:
 # --- Sidebar Buttons ---
 if st.sidebar.button("Submit Suggestion"):
     page = "submit"
-elif st.sidebar.button("Dashboard      "):
+elif st.sidebar.button("Dashboard"):
     page = "dashboard"
+else:
+    page = "submit"
 
 page = st.session_state.page
 # --- Main Title ---
