@@ -60,8 +60,8 @@ try:
             display_data = data
 
         st.subheader("All Suggestions")
-            for i, row in display_data.iterrows():
-        st.markdown(f"**[{row['Category']}]** {row['Suggestion']}")
+        for i, row in display_data.iterrows():
+            st.markdown(f"**[{row['Category']}]** {row['Suggestion']}")
             if st.button(f"Delete row {i}"):
                 # Remove the row from the main DataFrame
                 data = data.drop(row.name)
