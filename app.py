@@ -1,34 +1,67 @@
+# app.py
 import streamlit as st
 import pandas as pd
 from datetime import datetime
+import os
 
-st.set_page_config(page_title="Student Suggestion Box", layout="centered")
-st.title("📝 Student Suggestion Box")
+# --- Page Config ---
+st.set_page_config(
+    page_title="EchoBox - Student Suggestion Box",
+    layout="centered",
+    page_icon="📝"
+)
 
-# --- Form ---
-st.header("Submit Your Suggestion")
+# --- Sidebar ---
+st.sidebar.title("EchoBox")
+st.sidebar.caption("Anonymous Student Suggestion Box")
+# Optional: add school logo if you have one
+# st.sidebar.image("logo.png", width=150)
+
+# --- Main Title ---
+st.title("📝 EchoBox: Submit Your Suggestion")
+st.markdown("Help improve our school! Your suggestions are **anonymous** and valued.")
+
+# --- CSV File Setup ---
+CSV_FILE = "suggestions.csv"
+if not os.path.exists(CSV_FILE):
+    # create empty CSV with headers
+    pd.DataFrame(columns=["Time", "Category", "Suggestion"]).to_csv(CSV_FILE, index=False)
+
+# --- Suggestion Form ---
+st.header("Submit a Suggestion")
 with st.form("suggestion_form"):
     category = st.selectbox("Category", ["Academics", "Facilities", "Events", "Teachers", "Other"])
     suggestion = st.text_area("Your Suggestion")
     submitted = st.form_submit_button("Submit")
 
-if submitted and suggestion.strip() != "":
-    # Append to CSV
-    df = pd.DataFrame([[datetime.now(), category, suggestion]],
-                      columns=["Time", "Category", "Suggestion"])
-    df.to_csv("suggestions.csv", mode='a', header=False, index=False)
-    st.success("✅ Suggestion submitted successfully!")
+if submitted:
+    if suggestion.strip() != "":
+        # Append submission to CSV
+        df = pd.DataFrame([[datetime.now(), category, suggestion]],
+                          columns=["Time", "Category", "Suggestion"])
+        df.to_csv(CSV_FILE, mode='a', header=False, index=False)
+        st.success("✅ Suggestion submitted successfully!")
+    else:
+        st.error("❌ Please enter a suggestion before submitting.")
 
+# --- Dashboard Section ---
 st.header("📊 Dashboard - View Suggestions")
-# Load CSV
 try:
-    data = pd.read_csv("suggestions.csv", names=["Time", "Category", "Suggestion"])
-    st.dataframe(data)
+    data = pd.read_csv(CSV_FILE)
+    
+    # Filter by category
+    filter_cat = st.selectbox("Filter by Category", ["All"] + list(data['Category'].unique()))
+    if filter_cat != "All":
+        display_data = data[data['Category'] == filter_cat]
+    else:
+        display_data = data
 
-    # Category counts
-    category_counts = data['Category'].value_counts()
+    st.subheader("All Suggestions")
+    st.dataframe(display_data)
+
     st.subheader("Suggestions by Category")
+    category_counts = data['Category'].value_counts()
     st.bar_chart(category_counts)
 
-except FileNotFoundError:
-    st.info("No suggestions yet!")
+except Exception as e:
+    st.info("No suggestions submitted yet.")
