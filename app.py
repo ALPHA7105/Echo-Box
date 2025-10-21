@@ -60,6 +60,8 @@ if page == "submit":
                               columns=["Time", "Category", "Suggestion"])
             df.to_csv(CSV_FILE, mode='a', header=False, index=False)
             st.success("✅ Suggestion submitted successfully!")
+            st.write("Saved row:")
+            st.write([[datetime.now(), category, suggestion]])
         else:
             st.error("❌ Please enter a suggestion before submitting.")
 
