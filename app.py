@@ -27,6 +27,7 @@ page = st.session_state.page
 # --- Main Title ---
 st.title("📝 EchoBox: Submit Your Suggestion")
 st.markdown("Got an idea to make our school better? Share it here! Every suggestion counts and could spark real change — anonymously and safely.")
+st.markdown("---")
 
 # --- CSV File Setup ---
 CSV_FILE = "suggestions.csv"
@@ -35,7 +36,6 @@ if not os.path.exists(CSV_FILE):
     pd.DataFrame(columns=["Time", "Category", "Suggestion"]).to_csv(CSV_FILE, index=False)
 
 # --- Suggestion Form ---
-st.markdown("---")
 if page == "submit":
     st.header("Submit a Suggestion")
     st.markdown(
@@ -58,7 +58,6 @@ if page == "submit":
             st.error("❌ Please enter a suggestion before submitting.")
 
 # --- Dashboard Section ---
-st.markdown("---")
 if page == "dashboard":
     st.header("📊 Dashboard - View Suggestions")
     st.markdown("Below you can view all submitted suggestions, filter by category, and delete any if needed.")
@@ -92,5 +91,6 @@ if page == "dashboard":
 
     except FileNotFoundError:
         st.info("No suggestions submitted yet.")
+
 
 st.markdown("---")
