@@ -44,6 +44,8 @@ if submitted:
     else:
         st.error("❌ Please enter a suggestion before submitting.")
 
+st.title("---")
+
 # --- Dashboard Section ---
 st.header("📊 Dashboard - View Suggestions")
 
