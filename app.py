@@ -18,10 +18,11 @@ if "page" not in st.session_state:
     st.session_state.page = "submit"  # default page
 
 # --- Sidebar Buttons ---
-if st.sidebar.button("Submit Suggestion"):
-    st.session_state.page = "submit"
-if st.sidebar.button("Dashboard        "):
-    st.session_state.page = "dashboard"
+page = "submit"  # default
+if st.sidebar.markdown('<button style="width:200px">Submit Suggestion</button>', unsafe_allow_html=True):
+    page = "submit"
+if st.sidebar.markdown('<button style="width:200px">Dashboard</button>', unsafe_allow_html=True):
+    page = "dashboard"
 
 page = st.session_state.page
 # --- Main Title ---
