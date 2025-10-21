@@ -46,6 +46,8 @@ if submitted:
 
 # --- Dashboard Section ---
 st.header("📊 Dashboard - View Suggestions")
+
+# Load CSV
 try:
     data = pd.read_csv(CSV_FILE, names=["Time", "Category", "Suggestion"])
 
@@ -62,16 +64,15 @@ try:
         st.subheader("All Suggestions")
         for i, row in display_data.iterrows():
             st.markdown(f"**[{row['Category']}]** {row['Suggestion']}")
-            if st.button(f"Delete row {i}"):
-                # Remove the row from the main DataFrame
+            if st.button(f"Delete row {row.name}"):
                 data = data.drop(row.name)
-                # Overwrite CSV
                 data.to_csv(CSV_FILE, mode='w', header=False, index=False)
-                st.experimental_rerun()  # refresh the page
+                st.experimental_rerun()
 
         st.subheader("Suggestions by Category")
-        category_counts = data['Category'].value_counts()
-    st.bar_chart(category_counts)
-    
-except Exception as e:
+        if not data.empty:
+            category_counts = data['Category'].value_counts()
+            st.bar_chart(category_counts)
+
+except FileNotFoundError:
     st.info("No suggestions submitted yet.")
