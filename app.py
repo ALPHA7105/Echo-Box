@@ -6,7 +6,7 @@ import os
 
 # --- Page Config ---
 st.set_page_config(
-    page_title="EchoBox - Student Suggestion Box",
+    page_title="EchoBox",
     layout="centered",
     page_icon="📝"
 )
@@ -25,7 +25,7 @@ if st.sidebar.button("Dashboard"):
 
 page = st.session_state.page
 # --- Main Title ---
-st.title("📝 EchoBox: Submit Your Suggestion")
+st.title("📝 EchoBox")
 st.markdown("Got an idea to make our school better? Share it here! Every suggestion counts and could spark real change — anonymously and safely.")
 st.markdown("---")
 
@@ -99,7 +99,7 @@ st.markdown(
     """
     <p style="text-align:center; font-size:14px; color:gray;">
     🛠️ EchoBox - Student Suggestion Box <br>
-    Developed by: <strong>Sarvesh</strong> <br>
+    Developed by: <strong>Sarvesh Kore</strong> <br>
     For: Dunes Interschool Hackathon 3.0 <br>
     &copy; 2025
     </p>
