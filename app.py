@@ -28,6 +28,7 @@ page = st.session_state.page
 st.markdown(
     """
     <h1 style='text-align: center; font-size: 48px;'>📝 EchoBox</h1>
+    <br>
     """,
     unsafe_allow_html=True
 )
