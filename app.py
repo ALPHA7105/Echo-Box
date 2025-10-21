@@ -25,7 +25,12 @@ if st.sidebar.button("Dashboard"):
 
 page = st.session_state.page
 # --- Main Title ---
-st.title("📝 EchoBox")
+st.markdown(
+    """
+    <h1 style='text-align: center; font-size: 48px;'>📝 EchoBox</h1>
+    """,
+    unsafe_allow_html=True
+)
 st.markdown("Got an idea to make our school better? Share it here! Every suggestion counts and could spark real change — anonymously and safely.")
 st.markdown("---")
 
