@@ -34,9 +34,8 @@ if not os.path.exists(CSV_FILE):
     # create empty CSV with headers
     pd.DataFrame(columns=["Time", "Category", "Suggestion"]).to_csv(CSV_FILE, index=False)
 
-st.markdown("---")
-
 # --- Suggestion Form ---
+st.markdown("---")
 if page == "submit":
     st.header("Submit a Suggestion")
     st.markdown(
@@ -57,9 +56,9 @@ if page == "submit":
             st.success("✅ Suggestion submitted successfully!")
         else:
             st.error("❌ Please enter a suggestion before submitting.")
-st.markdown("---")
 
 # --- Dashboard Section ---
+st.markdown("---")
 if page == "dashboard":
     st.header("📊 Dashboard - View Suggestions")
     st.markdown("Below you can view all submitted suggestions, filter by category, and delete any if needed.")
@@ -93,3 +92,5 @@ if page == "dashboard":
 
     except FileNotFoundError:
         st.info("No suggestions submitted yet.")
+
+st.markdown("---")
