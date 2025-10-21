@@ -14,13 +14,16 @@ st.set_page_config(
 # --- Sidebar ---
 st.sidebar.title("EchoBox")
 st.sidebar.caption("Anonymous Student Suggestion Box")
-if st.sidebar.button("Submit Suggestion"):
-    page = "submit"
-elif st.sidebar.button("Dashboard"):
-    page = "dashboard"
-else:
-    page = "submit"  # default page
+if "page" not in st.session_state:
+    st.session_state.page = "submit"  # default page
 
+# --- Sidebar Buttons ---
+if st.sidebar.button("Submit Suggestion"):
+    st.session_state.page = "submit"
+if st.sidebar.button("Dashboard"):
+    st.session_state.page = "dashboard"
+
+page = st.session_state.page
 # --- Main Title ---
 st.title("📝 EchoBox: Submit Your Suggestion")
 st.markdown("Got an idea to make our school better? Share it here! Every suggestion counts and could spark real change — anonymously and safely.")
@@ -54,7 +57,7 @@ if page == "submit":
             st.success("✅ Suggestion submitted successfully!")
         else:
             st.error("❌ Please enter a suggestion before submitting.")
-st.mardown("---")
+st.markdown("---")
 
 # --- Dashboard Section ---
 if page == "dashboard":
