@@ -94,3 +94,15 @@ if page == "dashboard":
 
 
 st.markdown("---")
+
+st.markdown(
+    """
+    <p style="text-align:center; font-size:14px; color:gray;">
+    🛠️ EchoBox - Student Suggestion Box <br>
+    Developed by: <strong>Sarvesh</strong> <br>
+    For: Dunes Interschool Hackathon 3.0 <br>
+    &copy; 2025
+    </p>
+    """, 
+    unsafe_allow_html=True
+)
