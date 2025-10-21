@@ -58,13 +58,13 @@ try:
 
     st.subheader("All Suggestions")
     for i, row in display_data.iterrows():
-    st.markdown(f"**[{row['Category']}]** {row['Suggestion']}")
-    if st.button(f"Delete row {i}"):
-        # Remove the row from the main DataFrame
-        data = data.drop(row.name)
-        # Overwrite CSV
-        data.to_csv(CSV_FILE, mode='w', header=False, index=False)
-        st.experimental_rerun()  # refresh the page
+        st.markdown(f"**[{row['Category']}]** {row['Suggestion']}")
+        if st.button(f"Delete row {i}"):
+            # Remove the row from the main DataFrame
+            data = data.drop(row.name)
+            # Overwrite CSV
+            data.to_csv(CSV_FILE, mode='w', header=False, index=False)
+            st.experimental_rerun()  # refresh the page
 
     st.subheader("Suggestions by Category")
     category_counts = data['Category'].value_counts()
